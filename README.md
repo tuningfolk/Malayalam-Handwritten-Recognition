@@ -1,1 +1,0 @@
-# Malayalam-Handwritten-Recognition

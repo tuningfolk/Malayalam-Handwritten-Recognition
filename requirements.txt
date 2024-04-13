@@ -1,0 +1,5 @@
+zenml==0.56
+starlette
+zenml[server]==0.56.0
+logging
+matplotlib
