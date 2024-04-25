@@ -3,25 +3,7 @@ import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 
 from PIL import Image
 
-# import tensorflow as tf
-# from tensorflow.keras.preprocessing.image import ImageDataGenerator
-
-import matplotlib.pyplot as plt
-
-import torch
-import torchvision
-from torchvision import transforms, datasets
-
 from torch import nn
-from torch import optim
-import torch.nn.functional as F
-from torchvision import models
-
-from torch.autograd import Variable
-from torch.nn import Linear, ReLU, CrossEntropyLoss, Sequential, Conv2d, MaxPool2d, Module, Softmax, BatchNorm2d, Dropout
-from torch.optim import Adam, SGD
-
-import logging
 
 height,weight = 30,30
 channels = 1
@@ -83,7 +65,7 @@ class ConvNet(nn.Module):
 
 # print(model)
 
-def train_model(data, num_classes):
+def create_model(data, num_classes):
     
     model = ConvNet(num_classes)
     print(model)

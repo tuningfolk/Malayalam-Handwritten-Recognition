@@ -5,9 +5,6 @@ import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 
 from PIL import Image
 
-# import tensorflow as tf
-# from tensorflow.keras.preprocessing.image import ImageDataGenerator
-
 import matplotlib.pyplot as plt
 
 import torch
