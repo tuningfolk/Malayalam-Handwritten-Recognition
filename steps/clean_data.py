@@ -1,7 +1,8 @@
 import logging
 
-from zenml import step
 
-@step
 def clean_data(data):
-    pass 
+    print(type(data))
+
+    real_trainloader, real_testloader, char_to_label, label_to_char, num_classes = data
+   

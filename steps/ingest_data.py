@@ -42,19 +42,9 @@ class IngestData:
         self.data_path = data_path 
     def get_data(self):
         logging.info(f"Ingesting data from {self.data_path}")
-        return
-
-@step
-def ingest_data(data_path: str):
-    '''
-    Ingesting the data from the data path
-
-    Args:
-        data_path: path to the data
-    '''
-    height,width = 30,30
-    channels = 1
-    try:
+        height,width = 30,30
+        channels = 1
+        
         class SingleChannel(object):
             def __call__(self,img):
                 img_array = np.array(img)
@@ -68,7 +58,7 @@ def ingest_data(data_path: str):
             transforms.Resize((height,width)),
         ])
 
-        real_dataset = datasets.ImageFolder('../Malayalam-HCR/third_dataset/', transform=transformer)
+        real_dataset = datasets.ImageFolder(self.data_path, transform=transformer)
 
         real_train_size = int(0.8 * len(real_dataset))
         real_test_size = len(real_dataset) - real_train_size
@@ -77,9 +67,31 @@ def ingest_data(data_path: str):
 
         real_trainloader = torch.utils.data.DataLoader(real_train_dataset, batch_size = 64, shuffle=True)
         real_testloader = torch.utils.data.DataLoader(real_test_dataset, batch_size = 64, shuffle=True)
+        char_to_label = {}
+        label_to_char = {}
 
-        return real_trainloader, real_testloader, height,width
+        for i, (k,v) in enumerate(real_dataset.class_to_idx.items()):
+            char_to_label[k] = v
+            label_to_char[v] = k
+        num_classes = len(char_to_label)
+        print("Number of classes: ", num_classes)
+
+        return real_trainloader, real_testloader, char_to_label, label_to_char, num_classes
         
+
+# @step
+def ingest_data(data_path: str):
+    '''
+    Ingesting the data from the data path
+
+    Args:
+        data_path: path to the data
+    '''
+    try:
+        ingest_data = IngestData(data_path)
+        data = ingest_data.get_data()
+        print("LENGTH OF DATA :", len(data))
+        return data
     except Exception as e:
         logging.error("Error while ingesting data: {e}")
         raise e
