@@ -5,4 +5,4 @@ logging
 matplotlib
 torch
 torchvision
-
+opencv-python

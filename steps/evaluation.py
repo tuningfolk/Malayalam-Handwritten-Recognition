@@ -6,19 +6,11 @@ import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 from PIL import Image
 
 import matplotlib.pyplot as plt
-
 import torch
-import torchvision
-from torchvision import transforms, datasets
 
 from torch import nn
 from torch import optim
-import torch.nn.functional as F
-from torchvision import models
 
-from torch.autograd import Variable
-from torch.nn import Linear, ReLU, CrossEntropyLoss, Sequential, Conv2d, MaxPool2d, Module, Softmax, BatchNorm2d, Dropout
-from torch.optim import Adam, SGD
 def  evaluate_model(trainloader,testloader, model, device):
     '''
     Evaluates the model on the ingested data
@@ -33,7 +25,7 @@ def  evaluate_model(trainloader,testloader, model, device):
     for epoch in range(epochs):
         print('Epoch-{0} lr: {1}'.format(epoch+1, optimizer.param_groups[0]['lr']))
         running_loss = 0
-        for i,(images,classes) in enumerate(trainloader):
+        for i,(images,classes) in enumerate(trainloader):pyplot
             if i%20==0: print(f"iteration {i}/{len(trainloader)}")
             #use GPU
             images,classes = images.to(device), classes.to(device)
